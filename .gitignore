@@ -6,3 +6,5 @@
 *.ilk
 *.log
 *.idb
+*.suo
+*.db

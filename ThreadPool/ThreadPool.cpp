@@ -3,21 +3,20 @@
 ThreadPool::ThreadPool(int numberOfThreads)
 {
 	_threads = new Thread[numberOfThreads];
-    _numberOfThreads = _numberOfFreeThreads = numberOfThreads;
+    _numberOfThreads = numberOfThreads;
 }
 
-void ThreadPool::AddNewTask(LPTHREAD_START_ROUTINE threadsRoutine, std::queue<LPTHREAD_START_ROUTINE> *tasks)
+void ThreadPool::AddNewTask(LPTHREAD_START_ROUTINE threadRoutine, std::queue<LPTHREAD_START_ROUTINE> *tasks)
 {
-	int kek = GetFreeThreadIndex();
+	int freeThreadIndex = GetFreeThreadIndex();
 	
-	if (kek == -1)
+	if (freeThreadIndex == -1)
 	{
-		tasks->push(threadsRoutine);
+		tasks->push(threadRoutine);
 	}
 	else
 	{
-		_threads[kek].StartThread(threadsRoutine);
-		_numberOfFreeThreads--;
+		_threads[freeThreadIndex].StartThread(threadRoutine);
 	}
 }
 
@@ -31,11 +30,6 @@ int ThreadPool::GetFreeThreadIndex()
 		}
 	}
 	return -1;
-}
-
-int ThreadPool::GetFreeThreadsCount()
-{
-	return _numberOfFreeThreads;
 }
 
 bool ThreadPool::isAvailable(Thread *thread)

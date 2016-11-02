@@ -39,7 +39,6 @@ int main()
 	{
 		if (tp->GetFreeThreadIndex() >= 0)
 		{
-
 			tp->AddNewTask(tasks->front(), tasks);
 			tasks->pop();
 		}
