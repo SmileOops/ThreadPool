@@ -50,6 +50,19 @@ bool ThreadPool::isStillActive(Thread *thread, DWORD status)
 	return false;
 }
 
+bool ThreadPool::isFullyCompleted()
+{	
+	for (int i = 0; i < _numberOfThreads; i++)
+	{
+		if (!isAvailable(&_threads[i]))
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
 ThreadPool::~ThreadPool()
 {
 	delete _threads; 

@@ -44,7 +44,9 @@ int main()
 		}
 	}
 
-	Sleep(10000);
+	while (!tp->isFullyCompleted())
+	{
+	}
 
 	return 0;
 }
