@@ -2,7 +2,10 @@
 
 ThreadPool::ThreadPool(int numberOfThreads)
 {
+	_logger = new Logger("log.txt");
 	_threads = new Thread[numberOfThreads];
+	_logger->LogThreadPoolInitialization(numberOfThreads);
+
     _numberOfThreads = numberOfThreads;
 }
 
@@ -13,10 +16,12 @@ void ThreadPool::AddNewTask(LPTHREAD_START_ROUTINE threadRoutine, std::queue<LPT
 	if (freeThreadIndex == -1)
 	{
 		tasks->push(threadRoutine);
+		_logger->LogThreadPoolIsFilled();
 	}
 	else
 	{
 		_threads[freeThreadIndex].StartThread(threadRoutine);
+		_logger->LogTaskAdding((int)_threads[freeThreadIndex].GetThreadHandle());
 	}
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Thread.h";
+#include "Logger.h"
 #include <Windows.h>;
 #include <queue>;
 
@@ -18,6 +19,7 @@ public:
 
 private:
 	Thread *_threads;
+	Logger *_logger;
 	int _numberOfFreeThreads;
 	int _numberOfThreads;
 };
