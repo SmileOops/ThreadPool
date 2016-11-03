@@ -11,6 +11,7 @@ public:
 	void LogThreadPoolInitialization(int numberOfThreads);
 	void LogTaskAdding(int threadIndex);
 	void LogThreadPoolIsFilled();
+	void LogThreadPoolFinishedAllTasks();
 	
 private:
 	std::ofstream _logFile;

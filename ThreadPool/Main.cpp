@@ -27,26 +27,16 @@ void taskOne()
 int main()
 {
 	ThreadPool *tp = new ThreadPool(3);
-	std::queue<LPTHREAD_START_ROUTINE> *tasks = new std::queue<LPTHREAD_START_ROUTINE>;
 	
-	tp->AddNewTask((LPTHREAD_START_ROUTINE)taskOne, tasks);
-	tp->AddNewTask((LPTHREAD_START_ROUTINE)taskOne, tasks);
-	tp->AddNewTask((LPTHREAD_START_ROUTINE)taskThree, tasks);
-	tp->AddNewTask((LPTHREAD_START_ROUTINE)taskThree, tasks);
-	tp->AddNewTask((LPTHREAD_START_ROUTINE)taskThree, tasks);
+	tp->AddNewTask((LPTHREAD_START_ROUTINE)taskOne);
+	tp->AddNewTask((LPTHREAD_START_ROUTINE)taskOne);
+	tp->AddNewTask((LPTHREAD_START_ROUTINE)taskThree);
+	tp->AddNewTask((LPTHREAD_START_ROUTINE)taskThree);
+	tp->AddNewTask((LPTHREAD_START_ROUTINE)taskThree);
+	tp->AddNewTask((LPTHREAD_START_ROUTINE)taskThree);
+	tp->AddNewTask((LPTHREAD_START_ROUTINE)taskThree);
 	
-	while (!tasks->empty())
-	{
-		if (tp->GetFreeThreadIndex() >= 0)
-		{
-			tp->AddNewTask(tasks->front(), tasks);
-			tasks->pop();
-		}
-	}
-
-	while (!tp->isFullyCompleted())
-	{
-	}
+	tp->StartExecutingTasks();
 
 	return 0;
 }

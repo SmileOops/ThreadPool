@@ -11,7 +11,8 @@ public:
 	ThreadPool(int numberOfThreads);
 	~ThreadPool();
 
-	void AddNewTask(LPTHREAD_START_ROUTINE threadRoutine, std::queue<LPTHREAD_START_ROUTINE> *tasks);
+	void AddNewTask(LPTHREAD_START_ROUTINE threadRoutine);
+	void StartExecutingTasks();
 	int GetFreeThreadIndex();
 	bool isAvailable(Thread *thread);
 	bool isStillActive(Thread *thread, DWORD status);
@@ -19,6 +20,7 @@ public:
 
 private:
 	Thread *_threads;
+	std::queue<LPTHREAD_START_ROUTINE> *_tasks;
 	Logger *_logger;
 	int _numberOfFreeThreads;
 	int _numberOfThreads;

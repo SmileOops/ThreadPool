@@ -20,6 +20,11 @@ void Logger::LogThreadPoolIsFilled()
 	_logFile << "Cannot add a task. Thread pool is filled with busy threads. Waiting for free one.\n";
 }
 
+void Logger::LogThreadPoolFinishedAllTasks()
+{
+	_logFile << "Thread pool finished his tasks.\n";
+}
+
 Logger::~Logger()
 {
 	_logFile.close();
